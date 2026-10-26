@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A visual guide to aromatic stability, catalytic hydrogenation of benzene and cyclohexadienes, and catalyst selection.">
+<title>Catalytic Hydrogenation | Organic Chemistry Guide</title>
+<style>
+:root{
+  --ink:#172638;--muted:#5c6b7c;--paper:#f5f7fb;--card:#fff;--line:#dce4ee;
+  --blue:#2459a9;--teal:#087e8b;--gold:#d18a16;--soft-blue:#eaf1ff;--soft-teal:#e7f7f5;
+  --shadow:0 12px 32px rgba(25,48,79,.08);--radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.62 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{background:linear-gradient(120deg,#142f53,#2459a9 60%,#087e8b);color:white;padding:52px 22px 42px}
+.hero,.wrap{max-width:1120px;margin:auto}
+.eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:.78rem;font-weight:800;opacity:.82}
+h1{font-size:clamp(2.25rem,5vw,4rem);line-height:1.06;letter-spacing:-.04em;margin:.5rem 0 1rem}
+header p{max-width:760px;font-size:1.12rem;color:#edf4ff;margin:0}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.pill{border:1px solid #ffffff55;border-radius:999px;padding:5px 11px;font-size:.86rem;background:#ffffff12}
+nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.navinner{max-width:1120px;margin:auto;display:flex;gap:8px;overflow:auto;padding:10px 18px}
+nav a{white-space:nowrap;text-decoration:none;color:#334b68;padding:7px 11px;border-radius:9px;font-size:.9rem;font-weight:650}
+nav a:hover{background:var(--soft-blue);color:var(--blue)}
+.wrap{padding:30px 20px 64px}
+section{margin:0 0 30px;scroll-margin-top:80px}
+h2{font-size:clamp(1.55rem,3vw,2.15rem);letter-spacing:-.025em;margin:0 0 8px}
+h3{font-size:1.12rem;margin:0 0 8px}
+.lead{color:var(--muted);max-width:850px;margin:0 0 18px}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:21px;box-shadow:var(--shadow);min-width:0}
+.span-12{grid-column:span 12}.span-8{grid-column:span 8}.span-7{grid-column:span 7}.span-6{grid-column:span 6}.span-5{grid-column:span 5}.span-4{grid-column:span 4}
+.note{border-left:4px solid var(--teal);background:var(--soft-teal);padding:13px 15px;border-radius:0 12px 12px 0;margin:14px 0}
+.warn{border-left-color:var(--gold);background:#fff6e6}
+.small{font-size:.9rem;color:var(--muted)}
+.tag{display:inline-block;border-radius:7px;background:var(--soft-blue);color:var(--blue);padding:3px 8px;font-size:.78rem;font-weight:800;letter-spacing:.02em}
+.chem{background:#fbfcff;border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center;overflow:hidden}
+.chem svg{width:100%;max-width:280px;height:auto;display:block;margin:0 auto}
+.chem figcaption{font-size:.9rem;color:var(--muted);margin-top:4px}
+.reaction{display:grid;grid-template-columns:minmax(110px,1fr) minmax(120px,1.1fr) minmax(110px,1fr);gap:10px;align-items:center}
+.arrow{text-align:center;color:var(--blue);font-weight:800;font-size:.9rem}
+.arrow .line{display:block;font-size:1.8rem;line-height:1.1}
+.kpi{font-size:1.65rem;font-weight:850;color:var(--blue);line-height:1.2}
+table{border-collapse:collapse;width:100%;font-size:.94rem}
+th,td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:#334b68;background:#f6f8fc;font-size:.84rem;text-transform:uppercase;letter-spacing:.04em}
+tr:last-child td{border-bottom:0}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+ul,ol{padding-left:1.25rem}li{margin:.4rem 0}
+details{border:1px solid var(--line);border-radius:12px;padding:13px 15px;background:white;margin:10px 0}
+summary{font-weight:750;cursor:pointer}
+footer{border-top:1px solid var(--line);padding:22px 20px;color:var(--muted);text-align:center;font-size:.88rem}
+sup{line-height:0}
+@media(max-width:760px){.span-8,.span-7,.span-6,.span-5,.span-4{grid-column:span 12}.reaction{grid-template-columns:1fr}.arrow{padding:4px}.arrow .line{transform:rotate(90deg)}header{padding-top:38px}.card{padding:17px}th,td{min-width:130px}}
+@media print{nav{position:static}.card{box-shadow:none;break-inside:avoid}body{background:white}header{background:#2459a9!important;print-color-adjust:exact}.wrap{padding:18px 0}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hero">
+    <div class="eyebrow">Organic chemistry · reaction guide</div>
+    <h1>Catalytic Hydrogenation</h1>
+    <p>How H₂ adds to unsaturated molecules, why benzene resists hydrogenation, and how catalyst choice changes what reacts.</p>
+    <div class="pills"><span class="pill">Aromaticity</span><span class="pill">Benzene → cyclohexane</span><span class="pill">Cyclohexadienes</span><span class="pill">Catalyst selection</span></div>
+  </div>
+</header>
+<nav aria-label="Page sections"><div class="navinner">
+<a href="#core">Core idea</a><a href="#aromaticity">Aromatic stability</a><a href="#examples">Reaction examples</a><a href="#catalysts">Catalysts</a><a href="#rules">Rules of thumb</a><a href="#check">Knowledge check</a>
+</div></nav>
+<main class="wrap">
+<section id="core">
+<h2>1. The core idea</h2>
+<p class="lead">Catalytic hydrogenation reduces a multiple bond by adding hydrogen from H₂ to a substrate, typically using a metal surface. It is commonly used to convert alkenes to alkanes and, under suitable conditions, aromatic rings to saturated rings.</p>
+<div class="grid">
+  <article class="card span-4"><span class="tag">WHAT CHANGES?</span><h3 style="margin-top:10px">Bond order decreases</h3><p>An alkene C=C becomes C–C after one equivalent of H₂ is added. Each alkene carbon gains one H.</p><div class="chem">
+  <svg viewBox="0 0 260 92" role="img" aria-label="Ethene converted to ethane"><g fill="none" stroke="#2459a9" stroke-width="2.5" stroke-linecap="round"><line x1="66" y1="43" x2="103" y2="43"/><line x1="66" y1="49" x2="103" y2="49"/><line x1="183" y1="46" x2="199" y2="46"/></g><g fill="#172638" font-size="16" font-weight="650"><text x="26" y="51">H₂C</text><text x="106" y="51">CH₂</text><text x="139" y="50" fill="#2459a9">→</text><text x="202" y="51">CH₃</text><text x="152" y="79">+ H₂</text></g></svg>
+  <figcaption>Conceptual illustration: alkene → alkane</figcaption></div></article>
+  <article class="card span-4"><span class="tag">WHAT THE CATALYST DOES</span><h3 style="margin-top:10px">Lowers the kinetic barrier</h3><p>The metal surface adsorbs H₂ and the substrate, helps activate H–H, and enables hydrogen transfer. The catalyst is regenerated overall.</p><p class="small">Catalysts change the reaction pathway and rate; they do not change the reaction’s equilibrium position.</p></article>
+  <article class="card span-4"><span class="tag">GENERAL PATTERN</span><h3 style="margin-top:10px">Addition across π bonds</h3><p>For a simple alkene, one mole of H₂ is consumed per C=C reduced.</p><div class="note"><strong>Important:</strong> Hydrogenation is a reduction: the carbon atoms generally gain C–H bonds and lose π-bond character.</div></article>
+</div>
+</section>
+
+<section id="aromaticity">
+<h2>2. Why benzene is unusually stable</h2>
+<p class="lead">Benzene is not best understood as an ordinary cyclohexatriene with three isolated double bonds. Its six π electrons are delocalized around a planar, cyclic conjugated ring.</p>
+<div class="grid">
+<article class="card span-6">
+<h3>Benzene: delocalized π system</h3>
+<div class="chem">
+<svg viewBox="0 0 300 220" role="img" aria-label="Benzene hexagon with circle representing delocalized pi electrons">
+<polygon points="150,28 218,67 218,145 150,184 82,145 82,67" fill="none" stroke="#2459a9" stroke-width="3.5" stroke-linejoin="round"/>
+<circle cx="150" cy="106" r="43" fill="none" stroke="#087e8b" stroke-width="3"/>
+<g fill="#172638" font-size="12"><text x="150" y="15" text-anchor="middle">C₆H₆</text><text x="150" y="211" text-anchor="middle">6 π electrons · conjugated ring</text></g>
+</svg>
+<figcaption>The circle is a shorthand for delocalized π electrons, not a literal bond.</figcaption>
+</div>
+<ul>
+<li><strong>Planar and cyclic:</strong> p orbitals can overlap continuously around the ring.</li>
+<li><strong>Conjugated:</strong> every ring carbon contributes a p orbital.</li>
+<li><strong>Hückel rule:</strong> aromatic systems have <em>4n + 2</em> π electrons; benzene has 6 (n = 1).</li>
+</ul>
+</article>
+<article class="card span-6">
+<h3>Cyclohexadiene: not aromatic</h3>
+<div class="chem">
+<svg viewBox="0 0 300 220" role="img" aria-label="Cyclohexa-1,3-diene ring with two double bonds">
+<g fill="none" stroke="#2459a9" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M150 28 L218 67 L218 145 L150 184 L82 145 L82 67 Z"/>
+<path d="M155 39 L207 69 M207 143 L155 174"/>
+</g>
+<g fill="#172638" font-size="12"><text x="150" y="15" text-anchor="middle">C₆H₈</text><text x="150" y="211" text-anchor="middle">Two C=C bonds · interrupted conjugation</text></g>
+</svg>
+<figcaption>Illustrative cyclohexa-1,3-diene structure.</figcaption>
+</div>
+<p>In cyclohexa-1,3-diene, only four ring carbons participate in the conjugated diene π system; the remaining sp³ carbon interrupts cyclic overlap. It is therefore <strong>not aromatic</strong>.</p>
+<div class="note"><strong>Takeaway:</strong> Benzene’s extra stability comes from aromatic delocalization. That stability makes addition reactions that destroy aromaticity less favorable than ordinary alkene hydrogenation.</div>
+</article>
+</div>
+<div class="card" style="margin-top:16px">
+<h3>Aromaticity checklist</h3>
+<div class="grid">
+<div class="span-4"><div class="kpi">1</div><strong>Cyclic</strong><p class="small">The π system forms a ring.</p></div>
+<div class="span-4"><div class="kpi">2</div><strong>Planar and fully conjugated</strong><p class="small">A p orbital is available at every atom in the ring.</p></div>
+<div class="span-4"><div class="kpi">3</div><strong>4n + 2 π electrons</strong><p class="small">The count must fit n = 0, 1, 2… for a conventional aromatic system.</p></div>
+</div>
+<p class="small">Aromaticity is a combined structural and electronic criterion—not just “having alternating double bonds.”</p>
+</div>
+</section>
+
+<section id="examples">
+<h2>3. Key hydrogenation examples</h2>
+<p class="lead">The same reagent, H₂, can give different practical outcomes depending on the substrate and conditions. The diagrams below are reaction summaries, not experimental procedures.</p>
+<div class="card">
+<h3>Example A — benzene → cyclohexane</h3>
+<div class="reaction">
+<figure class="chem">
+<svg viewBox="0 0 180 150" role="img" aria-label="Benzene ring">
+<polygon points="90,22 137,49 137,101 90,128 43,101 43,49" fill="none" stroke="#2459a9" stroke-width="3"/>
+<circle cx="90" cy="75" r="29" fill="none" stroke="#087e8b" stroke-width="2.5"/>
+</svg><figcaption>Benzene · C₆H₆</figcaption></figure>
+<div class="arrow">3 H₂<br><span class="line">⟶</span><span class="small">metal catalyst; often elevated T/P</span></div>
+<figure class="chem">
+<svg viewBox="0 0 180 150" role="img" aria-label="Cyclohexane ring">
+<polygon points="90,22 137,49 137,101 90,128 43,101 43,49" fill="none" stroke="#087e8b" stroke-width="3.5" stroke-linejoin="round"/>
+<g fill="#172638" font-size="11"><text x="90" y="146" text-anchor="middle">all single bonds</text></g>
+</svg><figcaption>Cyclohexane · C₆H₁₂</figcaption></figure>
+</div>
+<p><strong>Net equation:</strong> C₆H₆ + 3 H₂ → C₆H₁₂</p>
+<p>Benzene requires three equivalents of H₂ to saturate all three π-bond equivalents. This transformation sacrifices aromaticity, so it commonly requires more forcing conditions than alkene hydrogenation. Industrially and in laboratory contexts, conditions depend strongly on catalyst, pressure, temperature, and substrate.</p>
+</div>
+<div class="grid" style="margin-top:16px">
+<article class="card span-6">
+<h3>Example B — cyclohexa-1,3-diene → cyclohexane</h3>
+<div class="reaction">
+<figure class="chem"><svg viewBox="0 0 180 150" role="img" aria-label="Cyclohexa-1,3-diene ring with two double bonds"><g fill="none" stroke="#2459a9" stroke-width="3" stroke-linecap="round"><path d="M90 22 L137 49 L137 101 L90 128 L43 101 L43 49 Z"/><path d="M95 32 L127 51 M127 99 L95 118"/></g></svg><figcaption>C₆H₈</figcaption></figure>
+<div class="arrow">2 H₂<br><span class="line">⟶</span><span class="small">suitable metal catalyst</span></div>
+<figure class="chem"><svg viewBox="0 0 180 150" role="img" aria-label="Cyclohexane ring"><polygon points="90,22 137,49 137,101 90,128 43,101 43,49" fill="none" stroke="#087e8b" stroke-width="3.5"/></svg><figcaption>C₆H₁₂</figcaption></figure>
+</div>
+<p><strong>Net equation:</strong> C₆H₈ + 2 H₂ → C₆H₁₂</p>
+<p>A cyclohexadiene has two C=C bonds, so full saturation requires two equivalents of H₂. The diene is nonaromatic; its π bonds are generally easier to hydrogenate than benzene’s aromatic system.</p>
+</article>
+<article class="card span-6">
+<h3>Example C — cyclohexene → cyclohexane</h3>
+<div class="reaction">
+<figure class="chem"><svg viewBox="0 0 180 150" role="img" aria-label="Cyclohexene ring with one double bond"><g fill="none" stroke="#2459a9" stroke-width="3" stroke-linecap="round"><path d="M90 22 L137 49 L137 101 L90 128 L43 101 L43 49 Z"/><path d="M95 32 L127 51"/></g></svg><figcaption>C₆H₁₀</figcaption></figure>
+<div class="arrow">1 H₂<br><span class="line">⟶</span><span class="small">commonly Pd, Pt, or Ni</span></div>
+<figure class="chem"><svg viewBox="0 0 180 150" role="img" aria-label="Cyclohexane ring"><polygon points="90,22 137,49 137,101 90,128 43,101 43,49" fill="none" stroke="#087e8b" stroke-width="3.5"/></svg><figcaption>C₆H₁₂</figcaption></figure>
+</div>
+<p><strong>Net equation:</strong> C₆H₁₀ + H₂ → C₆H₁₂</p>
+<p>One isolated alkene C=C usually consumes one equivalent of H₂. This is the standard baseline for comparing more complex unsaturated substrates.</p>
+</article>
+</div>
+<div class="note warn"><strong>Substrate selectivity matters.</strong> A molecule containing both an aromatic ring and another alkene may hydrogenate at the alkene first under many conditions, while the aromatic ring remains intact. This is a useful tendency, not a universal guarantee.</div>
+</section>
+
+<section id="catalysts">
+<h2>4. Catalyst selection: a practical conceptual guide</h2>
+<p class="lead">Choose a catalyst based on the bond you want to reduce, functional-group compatibility, selectivity, and the conditions a substrate can tolerate. No catalyst is universally “best.”</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Catalyst</th><th>Common use / strengths</th><th>Key cautions</th></tr></thead>
+<tbody>
+<tr><td><strong>Palladium</strong><br>Pd/C is common</td><td>Often effective for alkenes and alkynes; can reduce some other groups depending on conditions.</td><td>May also cause deprotection or hydrogenolysis (e.g., some benzyl protecting groups). Poisoning and selectivity depend on substrate and catalyst form.</td></tr>
+<tr><td><strong>Platinum</strong><br>e.g., PtO₂-derived catalyst</td><td>Broad hydrogenation activity; used for a range of unsaturated bonds, including some aromatic-ring reductions under suitable conditions.</td><td>Activity and selectivity vary; may reduce multiple functional groups.</td></tr>
+<tr><td><strong>Nickel</strong><br>e.g., Raney nickel</td><td>Often used for alkene hydrogenation and large-scale processes; can be cost-effective.</td><td>Conditions and compatibility vary; some nickel catalysts can promote desulfurization or other transformations.</td></tr>
+<tr><td><strong>Modified / selective catalysts</strong></td><td>Poisoned or modified catalysts can favor partial reduction in certain systems (for example, partial alkyne hydrogenation).</td><td>Partial reduction is substrate- and condition-dependent; over-reduction can occur.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="grid" style="margin-top:16px">
+<article class="card span-6"><h3>Decision sequence</h3><ol><li>Identify the target bond: alkene, alkyne, aromatic ring, or another reducible group.</li><li>List other groups that must remain unchanged (carbonyls, halides, nitro groups, protecting groups, sulfur-containing groups, etc.).</li><li>Decide whether complete or partial reduction is desired.</li><li>Use literature precedent for the closest substrate, then evaluate catalyst, solvent, temperature, and H₂ pressure together.</li><li>Confirm product identity and selectivity analytically.</li></ol></article>
+<article class="card span-6"><h3>Safety and handling</h3><p>Hydrogen is flammable; hydrogenation can be exothermic; and supported metal catalysts may be hazardous, especially if allowed to dry after use. Pyrophoricity and handling risks depend on catalyst formulation and state.</p><div class="note warn">This guide is conceptual, not an operating procedure. Follow approved lab procedures, risk assessments, equipment limits, and the specific catalyst supplier’s safety data. Never improvise pressurized hydrogenation equipment.</div></article>
+</div>
+</section>
+
+<section id="rules">
+<h2>5. Rules of thumb &amp; key takeaways</h2>
+<div class="grid">
+<article class="card span-4"><div class="kpi">1 : 1</div><h3>Alkene rule</h3><p>One C=C bond typically consumes one mole of H₂ when fully reduced to C–C.</p></article>
+<article class="card span-4"><div class="kpi">3 H₂</div><h3>Benzene rule</h3><p>Complete benzene-to-cyclohexane reduction consumes three moles of H₂ per mole of benzene.</p></article>
+<article class="card span-4"><div class="kpi">4n + 2</div><h3>Aromaticity rule</h3><p>A planar, cyclic, fully conjugated π system with 4n + 2 π electrons is aromatic under Hückel’s rule.</p></article>
+<article class="card span-6"><h3>Remember</h3><ul><li>Aromatic stabilization makes benzene less reactive toward addition than an ordinary alkene.</li><li>Hydrogenation of benzene destroys aromaticity; stronger conditions are often needed.</li><li>Cyclohexadiene is nonaromatic because conjugation does not extend around the whole ring.</li><li>Catalyst identity alone does not determine the product: conditions and substrate structure matter.</li></ul></article>
+<article class="card span-6"><h3>Common misconceptions</h3><ul><li><strong>“Benzene has three ordinary alkenes.”</strong> Its π electrons are delocalized, and all six C–C bonds are equivalent in the idealized structure.</li><li><strong>“A catalyst changes equilibrium.”</strong> It changes the rate/pathway, not the equilibrium constant.</li><li><strong>“More active is always better.”</strong> Higher activity may reduce selectivity or affect sensitive functional groups.</li><li><strong>“A ring with double bonds is aromatic.”</strong> Cyclic conjugation, geometry, and π-electron count all matter.</li></ul></article>
+</div>
+</section>
+
+<section id="check">
+<h2>6. Quick knowledge check</h2>
+<p class="lead">Open each card to test whether the key ideas have stuck.</p>
+<details><summary>How many equivalents of H₂ are needed to convert benzene to cyclohexane?</summary><p><strong>Three equivalents.</strong> Benzene’s formula changes from C₆H₆ to C₆H₁₂, adding six H atoms total.</p></details>
+<details><summary>Why is cyclohexa-1,3-diene not aromatic?</summary><p>It does not have a continuous cyclic p-orbital system: an sp³ carbon interrupts conjugation around the ring.</p></details>
+<details><summary>Does Pd/C always leave an aromatic ring untouched?</summary><p>No. Many conditions reduce ordinary alkenes preferentially, but outcomes depend on the substrate, catalyst, pressure, temperature, solvent, and reaction time.</p></details>
+<details><summary>What is the most important first question when selecting a hydrogenation catalyst?</summary><p>Which bond must be reduced—and which other functional groups must remain unchanged?</p></details>
+</section>
+<div class="small">Study note: Structures are schematic. Conditions mentioned are qualitative; consult trusted reaction precedent and safety documentation for real chemistry work.</div>
+</main>
+<footer>Organic Chemistry Learning Notes · Catalytic Hydrogenation · Self-contained HTML with embedded CSS and SVG graphics</footer>
+</body>
+</html>
